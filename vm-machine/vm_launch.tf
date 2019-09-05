@@ -1,4 +1,4 @@
-resource "vsphere_virtual_machine" "consul-master" {
+resource "vsphere_virtual_machine" "kubenode" {
   count            = "${var.launch_configuration_1["number_of_instace"]}"
   name             = "kube-node-${count.index+1}"
   resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
@@ -39,30 +39,30 @@ resource "vsphere_virtual_machine" "consul-master" {
 #     }
 # }
 
-  provisioner "file" {
-    source      = "install_docker.sh"
-    destination = "/tmp/"
+  # provisioner "file" {
+  #   source      = "install_docker.sh"
+  #   destination = "/tmp/"
 
-    connection {
-      host        = "${vsphere_virtual_machine.consul-master.default_ip_address}"
-      type        = "${var.launch_configuration_1.["connection_type"]}"
-      user        = "${var.launch_configuration_1.["connection_user"]}"
-      password    = "${var.launch_configuration_1.["connection_user"]}"
-      timeout = "10m"
-    }
-  }
+  #   connection {
+  #     host        = "${vsphere_virtual_machine.kubenode.default_ip_address}"
+  #     type        = "${var.launch_configuration_1.["connection_type"]}"
+  #     user        = "${var.launch_configuration_1.["connection_user"]}"
+  #     password    = "${var.launch_configuration_1.["connection_user"]}"
+  #     timeout = "10m"
+  #   }
+  # }
 
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/*sh",
-      "sudo /tmp/install_docker.sh",
-    ]
-    connection {
-      host         = "${vsphere_virtual_machine.consul-master.default_ip_address}"
-      type         = "${var.launch_configuration_1.["connection_type"]}"
-      user         = "${var.launch_configuration_1.["connection_user"]}"
-      password     = "${var.launch_configuration_1.["connection_user"]}"
-    }
-  }
-  # user_data = "${file("install_docker.sh")}"
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "chmod +x /tmp/*sh",
+  #     "sudo /tmp/install_docker.sh",
+  #   ]
+  #   connection {
+  #     host         = "${vsphere_virtual_machine.kubenode.default_ip_address}"
+  #     type         = "${var.launch_configuration_1.["connection_type"]}"
+  #     user         = "${var.launch_configuration_1.["connection_user"]}"
+  #     password     = "${var.launch_configuration_1.["connection_user"]}"
+  #   }
+  # }
+  # # user_data = "${file("install_docker.sh")}"
 }

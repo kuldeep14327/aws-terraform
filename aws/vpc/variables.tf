@@ -22,7 +22,12 @@ variable "vpc-cidr" {
     description = "CIDR value for VPC"
 }
 
-variable "subnet_names" {
+variable "subnets" {
+    type = list(string)
+    default = [ "DMZ", "Application", "Database", "Platform", "Redshift-1", "Redshift-2", "Citrix"]
+    description = "subnets need to create"
+}
+variable "subnet_az" {
     type = "map"
     default = {
     DMZ             = 1
@@ -35,4 +40,3 @@ variable "subnet_names" {
   }
     description = "number of subnets need to create"
 }
-

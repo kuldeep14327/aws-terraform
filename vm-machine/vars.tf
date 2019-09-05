@@ -1,36 +1,36 @@
 variable "vsphere_user" {
-	default = ""
+	default = "KSADM441@vsphere.local"
 }
 
 variable "vsphere_password" {
-	default = ""
+	default = "Innovaccer@1"
 }
 variable "vsphere_server" {
-	default = ""
+	default = "10.10.3.30"
 }
 
 # Comment this line out if you use datastore clusters
 
 variable "datacenter_name" {
-	default = ""
+	default = "InnoDC"
 }
 
 # Comment this line out if you use datastore clusters
 
 variable "datastore_name" {
-	default = ""
+	default = "DevOpsEMC02"
 }
 
 # Comment this line out if you use datastore clusters
 
 variable "compute_cluster_name" {
-	default = ""
+	default = "InnoDevops01"
 }
 
 # Comment this line out if you use network_name
 
 variable "network_name" {
-	default = ""
+	default = "DevOpsvlan14"
 }
 
 variable "template_name" {

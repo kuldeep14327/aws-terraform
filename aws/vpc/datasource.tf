@@ -1,4 +1,4 @@
-data "aws_availability_zones" "inno-az" {
+data "aws_availability_zones" "az" {
   state = "available"
 }
 
